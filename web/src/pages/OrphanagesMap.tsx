@@ -23,10 +23,10 @@ function OrphanagesMap() {
                 </footer>
             </aside>
 
-            <MapContainer 
-                center={[-22.814523, -47.064286]} 
+            <MapContainer
+                center={[-22.814523, -47.064286]}
                 zoom={13}
-                style={{width: "100%", height: "100%"}}
+                style={{ width: "100%", height: "100%" }}
             >
                 <TileLayer
                     // url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
