@@ -1,0 +1,22 @@
+{
+  "name": "orphanage-app",
+  "version": "1.0.0",
+  "description": "Web application where you can find orphanages and check their schedule for visits through the web site.",
+  "main": "index.js",
+  "scripts": {
+    "heroku-prebuild": "cd server && npm install",
+    "start": "cd server && npm start",
+    "web-build": "cd web && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Merligus/orphanage-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Merligus/orphanage-app/issues"
+  },
+  "homepage": "https://github.com/Merligus/orphanage-app#readme"
+}
