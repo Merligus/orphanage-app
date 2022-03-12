@@ -13,9 +13,10 @@ import { useNavigate } from "react-router-dom";
 export default function CreateOrphanage() {
     const navigate = useNavigate();
 
-    const [selectedPosition, setSelectedPosition] = useState<[number, number]>([
-        0, 0,
-    ]);
+    const [selectedPosition, setSelectedPosition] = useState({
+        latitude: 0,
+        longitude: 0,
+    });
     const [name, setName] = useState("");
     const [about, setAbout] = useState("");
     const [instructions, setInstructions] = useState("");
@@ -27,15 +28,22 @@ export default function CreateOrphanage() {
     function LocationMarker() {
         useMapEvents({
             click(event: LeafletMouseEvent) {
-                setSelectedPosition([event.latlng.lat, event.latlng.lng]);
+                setSelectedPosition({
+                    latitude: event.latlng.lat,
+                    longitude: event.latlng.lng,
+                });
             },
         });
 
-        return selectedPosition[0] !== 0 && selectedPosition[1] !== 0 ? (
+        return selectedPosition.latitude !== 0 &&
+            selectedPosition.longitude !== 0 ? (
             <Marker
                 interactive={false}
                 icon={mapIcon}
-                position={selectedPosition}
+                position={[
+                    selectedPosition.latitude,
+                    selectedPosition.longitude,
+                ]}
             />
         ) : null;
     }
@@ -56,10 +64,10 @@ export default function CreateOrphanage() {
         setPreviewImages(selectedImagesPreview);
     }
 
-    async function handleSubmit(event: FormEvent) {
+    async function onSubmitForm(event: FormEvent) {
         event.preventDefault();
 
-        const [latitude, longitude] = selectedPosition;
+        const { latitude, longitude } = selectedPosition;
 
         const data = new FormData();
 
@@ -83,9 +91,23 @@ export default function CreateOrphanage() {
         <div id="page-create-orphanage">
             <Sidebar />
             <main>
-                <form className="create-orphanage-form" onSubmit={handleSubmit}>
+                <form
+                    className="create-orphanage-form"
+                    onSubmit={function handleSubmit(event: FormEvent) {
+                        event.preventDefault();
+
+                        if (
+                            selectedPosition.latitude === 0 &&
+                            selectedPosition.latitude === 0
+                        ) {
+                            alert("Please select a location on the map");
+                        } else {
+                            onSubmitForm(event);
+                        }
+                    }}
+                >
                     <fieldset>
-                        <legend>Dados</legend>
+                        <legend>New Orphanage</legend>
 
                         <MapContainer
                             center={[-22.8145184, -47.0664804]}
@@ -102,6 +124,15 @@ export default function CreateOrphanage() {
                         <div className="input-block">
                             <label htmlFor="name">Name</label>
                             <input
+                                required
+                                onInvalid={(event) =>
+                                    event.currentTarget.setCustomValidity(
+                                        "Please give us the orphanage name"
+                                    )
+                                }
+                                onInput={(event) =>
+                                    event.currentTarget.setCustomValidity("")
+                                }
                                 id="name"
                                 value={name}
                                 onChange={(event) =>
@@ -116,6 +147,15 @@ export default function CreateOrphanage() {
                             </label>
                             <textarea
                                 id="name"
+                                required
+                                onInvalid={(event) =>
+                                    event.currentTarget.setCustomValidity(
+                                        "Please give us some information about the orphanage"
+                                    )
+                                }
+                                onInput={(event) =>
+                                    event.currentTarget.setCustomValidity("")
+                                }
                                 maxLength={300}
                                 value={about}
                                 onChange={(event) =>
@@ -142,6 +182,18 @@ export default function CreateOrphanage() {
                                     <FiPlus size={24} color="#15b6d6" />
                                 </label>
                                 <input
+                                    name="images-loader"
+                                    required
+                                    onInvalid={(event) =>
+                                        event.currentTarget.setCustomValidity(
+                                            "Please load some photos of the place"
+                                        )
+                                    }
+                                    onInput={(event) =>
+                                        event.currentTarget.setCustomValidity(
+                                            ""
+                                        )
+                                    }
                                     multiple
                                     onChange={handleSelectImages}
                                     type="file"
@@ -157,6 +209,15 @@ export default function CreateOrphanage() {
                         <div className="input-block">
                             <label htmlFor="instructions">Instructions</label>
                             <textarea
+                                required
+                                onInvalid={(event) =>
+                                    event.currentTarget.setCustomValidity(
+                                        "Please describe the instructions"
+                                    )
+                                }
+                                onInput={(event) =>
+                                    event.currentTarget.setCustomValidity("")
+                                }
                                 id="instructions"
                                 value={instructions}
                                 onChange={(event) =>
@@ -168,8 +229,18 @@ export default function CreateOrphanage() {
                         <div className="input-block">
                             <label htmlFor="opening_hours">Opening Hours</label>
                             <input
+                                required
+                                onInvalid={(event) =>
+                                    event.currentTarget.setCustomValidity(
+                                        "Please describe the opening time"
+                                    )
+                                }
+                                onInput={(event) =>
+                                    event.currentTarget.setCustomValidity("")
+                                }
                                 id="opening_hours"
                                 value={opening_hours}
+                                placeholder="hh:mm - hh:mm"
                                 onChange={(event) =>
                                     setOpeningHours(event.target.value)
                                 }
