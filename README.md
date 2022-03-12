@@ -1,5 +1,5 @@
 # orphanage-app
-Web application where you can find orphanages and check their schedule for visits through the web site. The application was developed using React and can be accessed at [hopeful-bohr-b7bfdd.netlify.app](https://tender-northcutt-996ba1.netlify.app).
+Web application where you can find orphanages and check their schedule for visits through the web site. The application was developed using React and can be accessed at [tender-northcutt-996ba1.netlify.app](https://tender-northcutt-996ba1.netlify.app).
 
 The back-end of the application was developed routing with express and a relational database using typeorm with sqlite3. The application also used multer to save image files and yup to validate data and is available at [merligus-orphanage-app.herokuapp.com](http://merligus-orphanage-app.herokuapp.com). The REST API was able to list all orphanages (GET /orphanages), create a new orphanage (POST /orphanages), get a orphanage by id (GET /orphanages/:id). 
 
