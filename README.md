@@ -42,7 +42,7 @@ To install the project you must:
       ```
    2. Create the environment variables file
       ```sh
-      printf "REACT_APP_BACKEND_URL=<own_mapbox_token>\nREACT_APP_BACKEND_URL=http://localhost:3333" > .env
+      printf "REACT_APP_MAPBOX_TOKEN=<own_mapbox_token>\nREACT_APP_BACKEND_URL=http://localhost:3333" > .env
       ```
    3. Run the web
       ```sh
