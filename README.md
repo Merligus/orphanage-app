@@ -18,7 +18,11 @@ To install the project you must:
       ```sh
       npm install
       ```
-   2. Run the server
+   2. Create the environment variables file
+      ```sh
+      printf "DOMAIN_URL=http://localhost:3333" > .env
+      ```
+   4. Run the server
       1. As a developer
          ```sh
          npm run dev
@@ -36,8 +40,12 @@ To install the project you must:
       ```sh
       npm install
       ```
-   2. Run the web
+   2. Create the environment variables file
+      ```sh
+      printf "REACT_APP_BACKEND_URL=<own_mapbox_token>\nREACT_APP_BACKEND_URL=http://localhost:3333" > .env
+      ```
+   3. Run the web
       ```sh
       npm run start
       ```
-   3. Access the web in your browser at [localhost:3000](http://localhost:3000)
+   4. Access the web in your browser at [localhost:3000](http://localhost:3000)
